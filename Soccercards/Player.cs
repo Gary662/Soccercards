@@ -5,11 +5,24 @@ namespace Soccercards.Models
 {
     public class Player
     {
+        private string _photo; 
         public string Name { get; set; }
         public int Age { get; set; }
         public string Team { get; set; }
-        public string Photo { get; set; }
-        public Image PlayerImage { get; set; } // image object for displaying
+        // Path to player's photo image
+        public string Photo {
+            get
+            {
+                return _photo;
+            }
+            set
+            {
+                _photo = value;
+                LoadPlayerImage();
+            }
+        }
+        // image object for displaying
+        public Image PlayerImage { get; set; } 
 
         public int Goals { get; set; }
         public int Assists { get; set; }
@@ -19,11 +32,9 @@ namespace Soccercards.Models
         public int RedCards { get; set; }
         public int Appearances { get; set; }
 
-        // Constructor to load the image based on the Photo path 
         public Player()
         {
-            // optionally load an image when creating the Player object 
-            LoadPlayerImage();
+           
         }
 
         //Method to load the image from the Photo path
@@ -36,10 +47,10 @@ namespace Soccercards.Models
                     // Load the image from the file path
                     PlayerImage = Image.FromFile(Photo);
                 }
-                catch
+                catch (Exception ex)
                 {
                     // Handle the case where the image path is invalid or file is missing
-                    Console.WriteLine($"Error loading image: {Exception.Message}");
+                    Console.WriteLine($"Error loading image: {ex.Message}");
                     // Set to null if the image can't be loaded
                     PlayerImage = null; 
                 }
