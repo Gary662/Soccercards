@@ -5,7 +5,7 @@ namespace Soccercards.Models
 {
     public class Player
     {
-        private string _photo; 
+        private string _photo; //
         public string Name { get; set; }
         public int Age { get; set; }
         public string Team { get; set; }
